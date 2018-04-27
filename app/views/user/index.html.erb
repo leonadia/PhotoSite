@@ -1,0 +1,21 @@
+<h1>PhotoSite User list</h1>
+<p>There are <%=@size%></p>
+<table>
+  <tr>
+    <th>User</th>
+    <th>First</th>
+    <th>Last</th>
+  </tr>
+  <% @users.each do |element| %>
+    <tr>
+      <td><%=element.id%></td>
+      <td><%=link_to element.first_name, move_path(@fn, :type => element)%></td>
+      <td><%=link_to element.last_name, move_path(@fn, :type => element)%></td>
+    </tr>
+  <% end %>
+
+</table>
+
+<style>
+
+</style>

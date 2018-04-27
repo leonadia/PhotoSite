@@ -1,0 +1,40 @@
+<h1><%=@user.first_name%> <%=@user.last_name%></h1>
+<% @photos = Photo.where(User_id: @user.id) %>
+<% @photos.each do |img|%>
+  <% @imgName = img.file_name %>
+  <div class = "post">
+    <%@poster = User.where(id: img.User_id)%>
+    <p class = "poster"><%=@poster[0].first_name%> <%=@poster[0].last_name%> <span class = "date_time">post it at <%=img.date_time%></span></p>
+    <%= image_tag @imgName%>
+    <% @comment = Comment.where(Photo_id: img.id) %>
+    <% @comment.each do |com|%>
+      <p class = "com_text">
+        <% @user=User.where(id: com.User_id)%>
+      <p class = "Commer"><%=link_to @user[0].first_name,move_path(@Uid, :type => @user[0].id) %> <%=@user[0].last_name%> said:</p>
+      <p class = "date_time"><%=com.date_time%></p>
+
+      <%=com.comment_text%></p>
+    <% end %>
+  </div>
+  <br>
+<% end %>
+<style>
+  .post {
+    font-size: larger;
+    border: 3px solid yellow;
+  }
+  .Commer {
+    font-size: large;
+    font-style: italic;
+  }
+  .date_time  {
+    font-size: large;
+    font-style: italic;
+  }
+
+  .poster {
+  }
+  .com_text {
+    border: 5px solid blue;
+  }
+</style>
